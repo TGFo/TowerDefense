@@ -515,7 +515,7 @@ MonoBehaviour:
   xSize: 25
   zSize: 25
   noiseScale: 0.3
-  heightMultiplier: 5
+  heightMultiplier: 2
   multiplier: 2
   noisePosOffset: 0
   randomNoiseScale: 0
