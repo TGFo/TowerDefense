@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static EnemyTowerEnums;
 
-public class TowerScript : TowerParent
+public class TowerSlow : TowerParent
 {
     void Update()
     {
@@ -18,10 +16,10 @@ public class TowerScript : TowerParent
             }
             targetCheckTimer = 0;
         }
-        
-        if(isTower == false)    // makes defense follow closest tower
+
+        if (isTower == false)    // makes defense follow closest tower
         {
-            if(target != null)
+            if (target != null)
             {
                 transform.LookAt(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z), Vector3.up);
             }
@@ -31,5 +29,15 @@ public class TowerScript : TowerParent
     {
         //stops the attack coroutine
         StopAttacking();
+    }
+
+    public override void Attack(EnemyScript target)
+    {
+        if (target == null)
+        {
+            return;
+        }
+        target.OnSlow(damage, 10);
+        Debug.Log("Attack" + gameObject.name);
     }
 }

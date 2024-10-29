@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: befeba0dea54f5744ad67e400fe93918, type: 3}
-  m_Name: BasicEnemy
+  m_Name: SuiciderEnemy
   m_EditorClassIdentifier: 
-  enemyType: 0
-  preferredDistance: 1
-  range: 10
-  damage: 1
-  attackSpeed: 5
-  maxHealth: 5
+  enemyType: 2
+  preferredDistance: 0
+  range: 0
+  damage: 4
+  attackSpeed: 0
+  maxHealth: 2
   regenRate: 0
-  speedMultiplier: 1
+  speedMultiplier: 5
   rank: 1
-  killReward: 5
+  killReward: 2
   model: {fileID: 8487919673474685565, guid: 0196dde91f20dff4699143a3222c397d, type: 3}

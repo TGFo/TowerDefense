@@ -880,7 +880,7 @@ MonoBehaviour:
   - Place defense towers on green points. Press [P] to start spawing enemies
   maxDefenses: 3
   defenses: 0
-  money: 0
+  money: 20
   currentWave: 0
   spawnedEnemies: []
   spawnedDefenses: []
@@ -888,11 +888,35 @@ MonoBehaviour:
   lost: 0
   defensePlacables:
   - {fileID: 11400000, guid: ef8b9992d4696844a98c8fa1ea4d60e9, type: 2}
+  - {fileID: 11400000, guid: eeb7b72740fb63445a0884b87d82cdc0, type: 2}
+  - {fileID: 11400000, guid: 650cc5c006a1c5141a5eaf1a7eccf6df, type: 2}
   spawnableEnemies:
   - {fileID: 11400000, guid: cf9fda7c9cefbb448a31721a546e9363, type: 2}
   tower: {fileID: 0}
   towerObj: {fileID: 0}
   towerPlaced: 0
+  waves:
+  - Wave:
+    - {fileID: 11400000, guid: cf9fda7c9cefbb448a31721a546e9363, type: 2}
+    - {fileID: 11400000, guid: cf9fda7c9cefbb448a31721a546e9363, type: 2}
+    - {fileID: 11400000, guid: cf9fda7c9cefbb448a31721a546e9363, type: 2}
+  - Wave:
+    - {fileID: 11400000, guid: cf9fda7c9cefbb448a31721a546e9363, type: 2}
+    - {fileID: 11400000, guid: cf9fda7c9cefbb448a31721a546e9363, type: 2}
+    - {fileID: 11400000, guid: cf9fda7c9cefbb448a31721a546e9363, type: 2}
+  - Wave:
+    - {fileID: 11400000, guid: b90bc6a442045764da939859ba379878, type: 2}
+    - {fileID: 11400000, guid: b90bc6a442045764da939859ba379878, type: 2}
+    - {fileID: 11400000, guid: b90bc6a442045764da939859ba379878, type: 2}
+  - Wave:
+    - {fileID: 11400000, guid: 9e7316a275f3b734b806ab6e96094c2d, type: 2}
+    - {fileID: 11400000, guid: 9e7316a275f3b734b806ab6e96094c2d, type: 2}
+    - {fileID: 11400000, guid: cf9fda7c9cefbb448a31721a546e9363, type: 2}
+  - Wave:
+    - {fileID: 11400000, guid: 9e7316a275f3b734b806ab6e96094c2d, type: 2}
+    - {fileID: 11400000, guid: 9e7316a275f3b734b806ab6e96094c2d, type: 2}
+    - {fileID: 11400000, guid: 9e7316a275f3b734b806ab6e96094c2d, type: 2}
+    - {fileID: 11400000, guid: cf9fda7c9cefbb448a31721a546e9363, type: 2}
 --- !u!4 &416180607
 Transform:
   m_ObjectHideFlags: 0

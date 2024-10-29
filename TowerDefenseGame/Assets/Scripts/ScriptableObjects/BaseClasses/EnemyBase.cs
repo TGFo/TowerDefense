@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static EnemyTowerEnums;
 
-[CreateAssetMenu(fileName = "New Enemy", menuName = "Enemies")]
+[CreateAssetMenu(fileName = "New Enemy", menuName = "Enemies/BaseEnemy")]
 public class EnemyBase : ScriptableObject
 {
+    public EnemyType enemyType;
+    public int preferredDistance;
     public float range;
     public float damage;
     public float attackSpeed;

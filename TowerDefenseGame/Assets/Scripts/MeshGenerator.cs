@@ -122,7 +122,7 @@ public class MeshGenerator : MonoBehaviour
     public void GenerateUvs()
     {
         int uvRemainder = (zSize + 1) % 2;  //get remainder of division by 2
-        Debug.Log(uvRemainder);
+        //Debug.Log(uvRemainder);
         for (int y = 0, i = 0; y <= (zSize / 2) - uvRemainder; y++) //runs for half the mesh
         {
             for (int x = 0; x <= xSize; x++)    //loops through vertices row by row setting uvs 

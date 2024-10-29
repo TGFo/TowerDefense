@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static EnemyTowerEnums;
 
 public class EnemyScript : MonoBehaviour
 {
 
     public EnemyBase enemyStats;
     public HealthBar healthBar;
+    public EnemyType enemyType;
 
     public float health;
     public float maxHealth;
@@ -16,18 +18,20 @@ public class EnemyScript : MonoBehaviour
     public Vector3[] path;
     public float speed = 2f;
     public float attackSpeed = 2f;
-    public float attackRange = 2f;
+    public float attackRange = 10f;
+    public int preferredDistance = 1;
     public float stopDuration = 0.1f;
     public SphereCollider AttackCollider;
-    private int currentPathIndex = 0;
+    public int currentPathIndex = 0;
     private bool isMoving = true;
     public GameObject target;
     public bool isAttacking = false;
     private Coroutine attackCoroutine;
-    TowerScript currentTarget;
-    public float targetCheckTime = 2;
+    public TowerParent currentTarget;
+    public float targetCheckTime = 100;
     public float targetCheckTimer = 0;
     public int killReward = 5;
+    public bool slowed = false;
     private void Start()
     {
         ApplyStats();
@@ -38,9 +42,13 @@ public class EnemyScript : MonoBehaviour
         targetCheckTimer += Time.deltaTime;
         if (targetCheckTimer >= targetCheckTime)
         {
-            Debug.Log(target);
+            //Debug.Log(target);
             if (target == null && currentPathIndex <= path.Length - 1)
             {
+                if(ResourceManager.instance.GetClosestDefense(transform.position) == null)
+                {
+                    return;
+                }
                 SetTarget(ResourceManager.instance.GetClosestDefense(transform.position));
             }
             if(currentPathIndex >= path.Length - 1)
@@ -58,20 +66,24 @@ public class EnemyScript : MonoBehaviour
         speedMult = enemyStats.speedMultiplier;
         attackSpeed = enemyStats.attackSpeed;
         killReward = enemyStats.killReward;
+        attackRange = enemyStats.range;
+        enemyType = enemyStats.enemyType;
+        preferredDistance = enemyStats.preferredDistance;
         healthBar.SetHealth(health, maxHealth);
     }
-    public void BeginMoving()
+    public void BeginMoving(int pathPos = 0)
     {
         if (path.Length > 0)
         {
-            transform.position = path[0];
+            transform.position = path[pathPos];
+            currentPathIndex = pathPos;
             StartCoroutine(MoveAlongPath());
         }
     }
     private IEnumerator MoveAlongPath()
     {
         //moves along given path, stopping when point is reached for set time
-        while (currentPathIndex < path.Length - 1)
+        while (currentPathIndex < path.Length - preferredDistance)
         {
             if (isMoving)
             {
@@ -85,10 +97,19 @@ public class EnemyScript : MonoBehaviour
                 currentPathIndex++;
             }
         }
+        if(currentPathIndex == path.Length)
+        {
+            if(enemyType == EnemyType.Suicider)
+            {
+                Attack();
+                OnKilled();
+            }
+        }
     }
 
     private IEnumerator AttackCoroutine()
     {
+        //Debug.Log("attacks: " + target);
         while (target != null)
         {
             if (Vector3.Distance(transform.position, target.transform.position) <= attackRange)
@@ -101,17 +122,28 @@ public class EnemyScript : MonoBehaviour
 
     private void Attack()
     {
+        //Debug.Log("Enemy attack" + currentTarget);
         if(currentTarget == null) 
         {
             return;
         }
         currentTarget.OnDamageTaken(damage);
-        Debug.Log("Enemy attack");
+        //Debug.Log("Enemy attack");
     }
     private void SetTarget(GameObject targetToAttack)
     {
+        if(enemyType == EnemyType.Suicider)
+        {
+            target = ResourceManager.instance.towerObj;
+            currentTarget = target.GetComponent<TowerParent>();
+            return;
+        }
+        if (targetToAttack == null)
+        {
+            return;
+        }
         target = targetToAttack;
-        currentTarget = target.GetComponent<TowerScript>();
+        currentTarget = target.GetComponent<TowerParent>();
         if (!isAttacking)
         {
             attackCoroutine = StartCoroutine(AttackCoroutine());
@@ -140,6 +172,15 @@ public class EnemyScript : MonoBehaviour
     }
     public void OnKilled()
     {
+        EnemySpawner spawner;
+        if(enemyType == EnemyType.Spawner)
+        {
+            spawner = (EnemySpawner)enemyStats;
+            foreach(EnemyBase enemy in spawner .spawnableEnemies)
+            {
+                ResourceManager.instance.SpawnEnemy(enemy, false, path);
+            }
+        }
         //adds money for purchasing defenses on death
         ResourceManager.instance.AddMoney(killReward);
         ResourceManager.instance.spawnedEnemies.Remove(gameObject);
@@ -148,5 +189,36 @@ public class EnemyScript : MonoBehaviour
     private void OnDestroy()
     {
         StopAttacking();
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (enemyType != EnemyType.Suicider)
+        {
+            return;
+        }
+        if (CompareTag("Defense"))
+        {
+            Debug.Log("Collided");
+            Attack();
+            OnKilled();
+        }
+    }
+    public void OnSlow(float slowValue, float slowTime)
+    {
+        if(slowed == true)
+        {
+            return;
+        }
+        Debug.Log("slowed");
+        slowed = true;
+        StartCoroutine(SlowEnemy(slowValue, slowTime));
+    }
+    public IEnumerator SlowEnemy(float slowValue, float slowTime)
+    {
+        float currentSpeed = speedMult;
+        speedMult = speedMult - slowValue;
+        yield return new WaitForSeconds(slowTime);
+        speedMult = currentSpeed;
+        slowed = false;
     }
 }

@@ -40,6 +40,8 @@ public class ResourceManager : MonoBehaviour
 
     public bool towerPlaced = false;
 
+    public WaveBase[] waves;
+
     public static ResourceManager instance { get; private set; }
     //basic script for keeping track of resources
     private void Awake()
@@ -115,22 +117,18 @@ public class ResourceManager : MonoBehaviour
     {
         GameManager.instance.SetWaves(currentWave);
         Debug.Log("starting next wave");
-        EnemyScript spawnedEnemy;
         EnemyBase enemyToSpawn;
-        GameObject enemyObject;
         currentWave++;
         currentWaveText.text = "Wave:" + currentWave.ToString();
-        for (int i = 0; i < currentWave * 2; i++)
+        for (int i = 0; i < waves[currentWave - 1].Wave.Count; i++)
         {
-            enemyToSpawn = spawnableEnemies[Random.Range(0,spawnableEnemies.Length)];
-            enemyObject = Instantiate(enemyToSpawn.model);
-            spawnedEnemy = enemyObject.GetComponent<EnemyScript>();
-            spawnedEnemy.enemyStats = enemyToSpawn;
-            spawnedEnemy.ApplyStats();
-            spawnedEnemy.path = meshGenerator.GetRandomPath();
-            spawnedEnemy.BeginMoving();
-            spawnedEnemies.Add(enemyObject);
+            enemyToSpawn = waves[currentWave - 1].Wave[i];
+            SpawnEnemy(enemyToSpawn);
             yield return new WaitForSeconds(1f);
+        }
+        if(currentWave >=  waves.Length)
+        {
+            currentWave = 0;
         }
     }
     public GameObject ClosestEnemy(Vector3 pos)
@@ -141,7 +139,7 @@ public class ResourceManager : MonoBehaviour
         {
             shortestDistance = Vector3.Distance(pos, spawnedEnemies[0].transform.position);
             closest = spawnedEnemies[0];
-            Debug.Log(shortestDistance);
+            //Debug.Log(shortestDistance);
             foreach (GameObject enemy in spawnedEnemies)
             {
                 if(Vector3.Distance(enemy.transform.position, pos) <= shortestDistance)
@@ -152,6 +150,25 @@ public class ResourceManager : MonoBehaviour
         }
         return closest;
     }
+    public GameObject[] ClosestEnemies(Vector3 pos)
+    {
+        List<GameObject> closest = new List<GameObject>(10);
+        float shortestDistance;
+        if (spawnedEnemies.Count > 0)
+        {
+            shortestDistance = Vector3.Distance(pos, spawnedEnemies[0].transform.position);
+            closest.Add(spawnedEnemies[0]);
+            Debug.Log(shortestDistance);
+            for(int i = 0; i < spawnedEnemies.Count; i++)
+            {
+                if (Vector3.Distance(spawnedEnemies[i].transform.position, pos) <= shortestDistance)
+                {
+                    closest.Add(spawnedEnemies[i]);
+                }
+            }
+        }
+        return closest.ToArray();
+    }
     public GameObject GetClosestDefense(Vector3 pos)
     {
         GameObject closest = null;
@@ -160,7 +177,7 @@ public class ResourceManager : MonoBehaviour
         {
             shortestDistance = Vector3.Distance(pos, spawnedDefenses[0].transform.position);
             closest = spawnedDefenses[0];
-            Debug.Log(shortestDistance);
+            //Debug.Log(shortestDistance);
             foreach (GameObject defense in spawnedDefenses)
             {
                 if (Vector3.Distance(defense.transform.position, pos) <= shortestDistance)
@@ -175,5 +192,24 @@ public class ResourceManager : MonoBehaviour
     {
         money += amount;
         GameManager.instance.SetMoney(money);
+    }
+    public void SpawnEnemy(EnemyBase enemyToSpawn, bool randomPath = true, Vector3[] path = null)
+    {
+        EnemyScript spawnedEnemy;
+        GameObject enemyObject;
+        enemyObject = Instantiate(enemyToSpawn.model);
+        spawnedEnemy = enemyObject.GetComponent<EnemyScript>();
+        spawnedEnemy.enemyStats = enemyToSpawn;
+        spawnedEnemy.ApplyStats();
+        if(randomPath)
+        {
+            spawnedEnemy.path = meshGenerator.GetRandomPath();
+        }
+        else
+        {
+            spawnedEnemy.path = path;
+        }
+        spawnedEnemy.BeginMoving(spawnedEnemy.currentPathIndex);
+        spawnedEnemies.Add(enemyObject);
     }
 }

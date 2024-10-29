@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static EnemyTowerEnums;
 
 public class MouseOverVert : MonoBehaviour
 {
@@ -77,10 +78,10 @@ public class MouseOverVert : MonoBehaviour
         ResourceManager.instance.PlaceDefense(currentPlacable);
         GameObject defense = Instantiate(currentSelected);
         defense.transform.position = pos;
-        TowerScript towerScript = defense.GetComponent<TowerScript>();
+        TowerParent towerScript = defense.GetComponent<TowerParent>();
         towerScript.OnTowerPlaced(currentPlacable);
         ResourceManager.instance.spawnedDefenses.Add(defense);
-        if(currentPlacable.type == DefenseObject.PlacableType.Tower)
+        if(currentPlacable.type == PlacableType.Tower)
         {
             pos.y = 0;
             defense.transform.position = pos;
