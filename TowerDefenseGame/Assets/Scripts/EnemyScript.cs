@@ -194,6 +194,7 @@ public class EnemyScript : MonoBehaviour
     private void OnDestroy()
     {
         StopAttacking();
+        characterModel.GetComponent<Renderer>().sharedMaterial.SetFloat("_Amplitude", 0);
     }
     private void OnTriggerEnter(Collider other)
     {
