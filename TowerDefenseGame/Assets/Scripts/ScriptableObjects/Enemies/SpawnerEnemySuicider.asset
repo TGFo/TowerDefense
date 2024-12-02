@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 888643f3a5a57c04688ca3b875247e12, type: 3}
+  m_Name: SpawnerEnemySuicider
+  m_EditorClassIdentifier: 
+  enemyType: 1
+  preferredDistance: 5
+  range: 5
+  damage: 1
+  attackSpeed: 5
+  maxHealth: 10
+  regenRate: 0
+  speedMultiplier: 0.5
+  rank: 2
+  killReward: 10
+  model: {fileID: 8487919673474685565, guid: 267e94b4699ea9741907250145141158, type: 3}
+  spawnableEnemies:
+  - {fileID: 11400000, guid: b90bc6a442045764da939859ba379878, type: 2}

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373373d5e7153b14e8c016454cfbb374, type: 3}
+  m_Name: TowerRank3
+  m_EditorClassIdentifier: 
+  health: 30
+  name: Range upgrade
+  description: Basic tower
+  cost: 20
+  model: {fileID: 2107865686865615899, guid: e4fa72aa712199448aa12303653c3a5d, type: 3}
+  icon: {fileID: 0}
+  appearence: {fileID: 3364624639691068437, guid: 4e83db3827e092d40a121fe685fee400, type: 3}
+  type: 0
+  FireRate: 5
+  damage: 5
+  rank: 0
+  range: 10
+  slowTime: 0
+  upgrades: []

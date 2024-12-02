@@ -10,4 +10,5 @@ public class BasePlacable : ScriptableObject
     public int cost;
     public GameObject model;
     public Sprite icon;
+    public GameObject appearence;
 }

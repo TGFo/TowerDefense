@@ -8,9 +8,9 @@ public class DefenseObject : BasePlacable
 {
     public PlacableType type;
     public float FireRate;
-    public GameObject projectile;
     public int damage;
     public int rank;
     public float range;
     public float slowTime;
+    public DefenseObject[] upgrades;
 }

@@ -37,6 +37,7 @@ public class ResourceManager : MonoBehaviour
     public EnemyBase[] spawnableEnemies;
     public BasePlacable tower;
     public GameObject towerObj;
+    public TowerParent mainTower;
 
     public bool towerPlaced = false;
 
@@ -211,5 +212,16 @@ public class ResourceManager : MonoBehaviour
         }
         spawnedEnemy.BeginMoving(spawnedEnemy.currentPathIndex);
         spawnedEnemies.Add(enemyObject);
+    }
+    public float GetCurrentTowerPercentage()
+    {
+        if(towerPlaced == false)
+        {
+            return 1;
+        }
+        float currentPercentage = 0;
+        currentPercentage = mainTower.health / mainTower.maxHealth;
+        Debug.Log(currentPercentage);
+        return currentPercentage;
     }
 }

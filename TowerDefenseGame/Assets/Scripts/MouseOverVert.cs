@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,6 +22,7 @@ public class MouseOverVert : MonoBehaviour
     public GameObject verticalLayoutGroup;
     public Button towerBuy;
     public bool towerPlaced = false;
+    public TMP_Text currentSelectedTxt;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +54,11 @@ public class MouseOverVert : MonoBehaviour
                     PlaceSelected(vertPosition);
                 }
             }
+            if(currentSelected == null)
+            {
+                currentSelectedTxt.text = "";
+            }else
+            currentSelectedTxt.text = currentSelected.name;
         }
     }
     public void SetSelected(DefenseObject selected)
@@ -86,6 +93,7 @@ public class MouseOverVert : MonoBehaviour
             pos.y = 0;
             defense.transform.position = pos;
             TowerSelected(pos, defense);
+            ResourceManager.instance.mainTower = towerScript;
         }
         meshGenerator.HidePlacementPoint(pos);
     }

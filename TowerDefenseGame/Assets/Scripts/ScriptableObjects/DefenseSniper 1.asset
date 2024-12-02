@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373373d5e7153b14e8c016454cfbb374, type: 3}
+  m_Name: DefenseSniper 1
+  m_EditorClassIdentifier: 
+  health: 10
+  name: Sniper tower
+  description: High damage attacks from long range every 10 seconds
+  cost: 25
+  model: {fileID: 8626664800868740137, guid: 6f4596ad7c39ce1419d1fc049cdbd737, type: 3}
+  icon: {fileID: 0}
+  appearence: {fileID: 8895896802114869808, guid: 9dec8603453209947bedb2d776d98d3c, type: 3}
+  type: 1
+  FireRate: 5
+  damage: 5
+  rank: 1
+  range: 50
+  slowTime: 0
+  upgrades:
+  - {fileID: 11400000, guid: c98695e883a6c5842becef8f8b401098, type: 2}
+  - {fileID: 11400000, guid: 204e5401be0989f4a86054f91cfe3b25, type: 2}

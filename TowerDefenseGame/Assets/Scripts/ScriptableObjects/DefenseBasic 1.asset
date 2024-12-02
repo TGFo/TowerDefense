@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373373d5e7153b14e8c016454cfbb374, type: 3}
+  m_Name: DefenseBasic 1
+  m_EditorClassIdentifier: 
+  health: 10
+  name: Basic Defense
+  description: 'Basic defensive structure '
+  cost: 10
+  model: {fileID: 8626664800868740137, guid: 6f4596ad7c39ce1419d1fc049cdbd737, type: 3}
+  icon: {fileID: 0}
+  appearence: {fileID: 5065096459740027634, guid: 8005120f4fa823b4eac90e9ed277c8e9, type: 3}
+  type: 1
+  FireRate: 5
+  damage: 5
+  rank: 0
+  range: 20
+  slowTime: 0
+  upgrades:
+  - {fileID: 11400000, guid: f97b6f1f457341c408cf6f96e12d9c99, type: 2}
+  - {fileID: 11400000, guid: 4c1187494aea83f498bd239f424f194c, type: 2}

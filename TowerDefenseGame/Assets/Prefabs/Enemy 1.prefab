@@ -88,6 +88,9 @@ MonoBehaviour:
   targetCheckTime: 2
   targetCheckTimer: 0
   killReward: 5
+  slowed: 0
+  explosionPrefab: {fileID: 7398624850472729322, guid: 1bd68ad006608e844ae4d98db106136d, type: 3}
+  characterModel: {fileID: 6365875476984168529}
 --- !u!54 &6384842945655737445
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -292,5 +295,10 @@ PrefabInstance:
 --- !u!4 &5986395133622573803 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7015127767238285010, guid: 73f09dc718cb9274db700269ff5be67a, type: 3}
+  m_PrefabInstance: {fileID: 3623514380437867577}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6365875476984168529 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7643010051636448360, guid: 73f09dc718cb9274db700269ff5be67a, type: 3}
   m_PrefabInstance: {fileID: 3623514380437867577}
   m_PrefabAsset: {fileID: 0}

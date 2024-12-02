@@ -6,6 +6,7 @@ public class TowerSlow : TowerParent
 {
     void Update()
     {
+        base.HandleMouseOver();
         targetCheckTimer += Time.deltaTime;
         if (targetCheckTimer >= targetCheckTime) // checks for a target based on a timer
         {

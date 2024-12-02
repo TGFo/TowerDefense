@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 using static EnemyTowerEnums;
 
 public class EnemyScript : MonoBehaviour
@@ -32,6 +33,8 @@ public class EnemyScript : MonoBehaviour
     public float targetCheckTimer = 0;
     public int killReward = 5;
     public bool slowed = false;
+    public GameObject explosionPrefab;
+    public GameObject characterModel;
     private void Start()
     {
         ApplyStats();
@@ -184,6 +187,8 @@ public class EnemyScript : MonoBehaviour
         //adds money for purchasing defenses on death
         ResourceManager.instance.AddMoney(killReward);
         ResourceManager.instance.spawnedEnemies.Remove(gameObject);
+        GameObject explosion = Instantiate(explosionPrefab, gameObject.transform.position, Quaternion.identity);
+        Destroy(explosion, 1f);
         Destroy(gameObject);
     }
     private void OnDestroy()
@@ -217,8 +222,10 @@ public class EnemyScript : MonoBehaviour
     {
         float currentSpeed = speedMult;
         speedMult = speedMult - slowValue;
+        characterModel.GetComponent<Renderer>().sharedMaterial.SetFloat("_Amplitude", 0.01f);
         yield return new WaitForSeconds(slowTime);
         speedMult = currentSpeed;
+        characterModel.GetComponent<Renderer>().sharedMaterial.SetFloat("_Amplitude", 0);
         slowed = false;
     }
 }

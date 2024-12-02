@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373373d5e7153b14e8c016454cfbb374, type: 3}
+  m_Name: DefenseSniper 2
+  m_EditorClassIdentifier: 
+  health: 15
+  name: Firerate upgrade
+  description: High damage attacks from long range every 10 seconds
+  cost: 35
+  model: {fileID: 8626664800868740137, guid: 6f4596ad7c39ce1419d1fc049cdbd737, type: 3}
+  icon: {fileID: 0}
+  appearence: {fileID: 1169588232708169740, guid: a3532c6cebd9d0f40b8d530a00d42de5, type: 3}
+  type: 1
+  FireRate: 2.5
+  damage: 5
+  rank: 1
+  range: 50
+  slowTime: 0
+  upgrades: []

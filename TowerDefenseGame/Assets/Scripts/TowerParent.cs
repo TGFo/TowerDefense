@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using static EnemyTowerEnums;
 
@@ -22,6 +24,16 @@ public abstract class TowerParent : MonoBehaviour
     public bool isAttacking = false;
     public float targetCheckTime = 2;
     public float targetCheckTimer = 0;
+    public GameObject model;
+    public Transform appearenceTransform;
+
+    public GameObject[] upgradeButton;
+    public TMP_Text[] upgradeName;
+    public int[] upgradeCost;
+    public TMP_Text[] upgradeCostText;
+    private Camera mainCamera; // Reference to the main camera
+    private bool isMouseOver = false; // Track if the mouse is over the object
+    public bool isUpgraded = false;
 
     public virtual void OnTowerPlaced(DefenseObject placable)
     {
@@ -30,15 +42,41 @@ public abstract class TowerParent : MonoBehaviour
         health = placable.health;
         fireRate = placable.FireRate;
         range = placable.range;
-        sphereCollider.radius = range;
         damage = placable.damage;
         placableType = placable.type;
         healthBar.SetHealth(health, maxHealth);
+        
+        for(int i = 0; i < upgradeName.Length; i++)
+        {
+            if (placable.upgrades[i] != null)
+            {
+                upgradeName[i].text = placable.upgrades[i].name;
+                upgradeCost[i] = placable.upgrades[i].cost;
+                upgradeCostText[i].text = upgradeCost[i].ToString();
+            }
+        }
         if (placable.type == PlacableType.Tower)
         {
             isTower = true;
+            return;
+        }
+        ChangeAppearence(placable.appearence);
+    }
+
+    private void Start()
+    {
+        mainCamera = Camera.main;
+
+        // Ensure buttons are hidden at the start
+        if (upgradeButton != null) 
+        {
+            foreach (GameObject button in upgradeButton)
+            {
+                if (button != null) button.SetActive(false);
+            }
         }
     }
+
     //attacks based on attack rate
     public virtual IEnumerator AttackCoroutine()
     {
@@ -107,5 +145,69 @@ public abstract class TowerParent : MonoBehaviour
     {
         //stops the attack coroutine
         StopAttacking();
+    }
+    public void ChangeAppearence(GameObject newModel)
+    {
+        if(model != null)
+        {
+            Destroy(model);
+        }
+        model = Instantiate(newModel, appearenceTransform);
+    }
+    public void HandleMouseOver()
+    {
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            if (hit.transform == transform)
+            {
+                if (!isMouseOver)
+                {
+                    if (isUpgraded == false)
+                    {
+                        isMouseOver = true;
+                        SetButtonsActive(true);
+                    }
+                }
+                return;
+            }
+        }
+
+        if (isMouseOver)
+        {
+            isMouseOver = false;
+            SetButtonsActive(false);
+        }
+    }
+
+    private void SetButtonsActive(bool isActive)
+    {
+        if (upgradeButton != null)
+        {
+            foreach (GameObject button in upgradeButton)
+            {
+                if (button != null) button.SetActive(isActive);
+            }
+        }
+    }
+    private void Update()
+    {
+        HandleMouseOver();
+    }
+    public void UpgradeUnit(int index)
+    {
+        Debug.Log("upgrade clicked");
+        if (ResourceManager.instance.money < placable.upgrades[index].cost) return;
+        ResourceManager.instance.money -= placable.upgrades[index].cost;
+        maxHealth = placable.upgrades[index].health;
+        health = placable.upgrades[index].health;
+        fireRate = placable.upgrades[index].FireRate;
+        range = placable.upgrades[index].range;
+        damage = placable.upgrades[index].damage;
+        healthBar.SetHealth(health, maxHealth);
+        ChangeAppearence(placable.upgrades[index].appearence);
+        SetButtonsActive(false);
+        isUpgraded = true;
     }
 }

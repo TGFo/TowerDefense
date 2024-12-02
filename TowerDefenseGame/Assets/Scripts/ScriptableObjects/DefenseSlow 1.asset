@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373373d5e7153b14e8c016454cfbb374, type: 3}
+  m_Name: DefenseSlow 1
+  m_EditorClassIdentifier: 
+  health: 5
+  name: Glue Tower
+  description: Slows an enemy instead of damaging it
+  cost: 15
+  model: {fileID: 8626664800868740137, guid: 6aa56212d2bd1f547a66260f0e6b3149, type: 3}
+  icon: {fileID: 0}
+  appearence: {fileID: 6611495854316106771, guid: c780722956f879444a920771365feeb0, type: 3}
+  type: 1
+  FireRate: 1
+  damage: 1
+  rank: 1
+  range: 10
+  slowTime: 5
+  upgrades:
+  - {fileID: 11400000, guid: fd2e3a983f528fe45bc285631f4a0044, type: 2}
+  - {fileID: 11400000, guid: bb8f179628eb8bd499148c7c8743093d, type: 2}

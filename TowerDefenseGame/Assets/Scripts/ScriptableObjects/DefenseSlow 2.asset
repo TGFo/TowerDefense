@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373373d5e7153b14e8c016454cfbb374, type: 3}
+  m_Name: DefenseSlow 2
+  m_EditorClassIdentifier: 
+  health: 10
+  name: Slowtime upgrade
+  description: Slows an enemy instead of damaging it
+  cost: 20
+  model: {fileID: 8626664800868740137, guid: 6aa56212d2bd1f547a66260f0e6b3149, type: 3}
+  icon: {fileID: 0}
+  appearence: {fileID: 5587398326826834221, guid: cc060122ea84a55498739733cea827bd, type: 3}
+  type: 1
+  FireRate: 1
+  damage: 1
+  rank: 1
+  range: 10
+  slowTime: 10
+  upgrades: []

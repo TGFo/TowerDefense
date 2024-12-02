@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373373d5e7153b14e8c016454cfbb374, type: 3}
+  m_Name: DefenseSniper 3
+  m_EditorClassIdentifier: 
+  health: 15
+  name: Damage upgrade
+  description: High damage attacks from long range every 10 seconds
+  cost: 35
+  model: {fileID: 8626664800868740137, guid: 6f4596ad7c39ce1419d1fc049cdbd737, type: 3}
+  icon: {fileID: 0}
+  appearence: {fileID: 1169588232708169740, guid: 016d1ee92610e744597e7e580fb6bf4d, type: 3}
+  type: 1
+  FireRate: 5
+  damage: 10
+  rank: 1
+  range: 50
+  slowTime: 0
+  upgrades: []
